@@ -1,6 +1,6 @@
 from django.shortcuts import render
+from django.forms import Form, BooleanField, CharField, ChoiceField, ModelChoiceField
 
-from django.forms import Form, CharField, ModelChoiceField, ChoiceField, BooleanField
 from .models import Product, Category
 
 
@@ -10,6 +10,7 @@ def category_view(request, name):
     return render(request, "store/category.html",
                   {'products': products,
                    'category_name': name})
+
 
 
 ORDER_CHOICES = [
@@ -33,9 +34,9 @@ def filter_view(request):
         order_by = form.cleaned_data['order_by']
         only_in_stock = form.cleaned_data['only_in_stock']
 
-        products = Product.objects.filter(name__icontains=name)
+        products = Product.objects.filter(name__icontains=name).prefetch_related('images')
         if category:
-            products = products.filter(categories=category)
+            products = products.filter(category=category)
 
         if only_in_stock:
             products = products.filter(stock_count__gt=0)
@@ -51,4 +52,8 @@ def filter_view(request):
         # Incorrect form submission? Just get everything.
         products = Product.objects.all()
     return render(request, "store/filter.html", {'form': form, 'products': products})
+
+
+
+
 

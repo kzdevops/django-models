@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils.functional import cached_property
 from decimal import Decimal
 
 
