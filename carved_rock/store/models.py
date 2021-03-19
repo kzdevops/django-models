@@ -15,7 +15,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.TextField(default="", blank=True)
     sku = models.CharField(verbose_name="Stock Keeping Unit", max_length=20, unique=True)
-    #slug = models.SlugField()
+    slug = models.SlugField()
 
     objects = models.Manager()
     in_stock = ProductInStockQuerySet.as_manager()
