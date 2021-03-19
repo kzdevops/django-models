@@ -14,7 +14,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     image = models.ImageField()
-    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name="images")
 
     def __str__(self):
         return str(self.image)
@@ -22,7 +22,7 @@ class ProductImage(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    products = models.ManyToManyField('Product')
+    products = models.ManyToManyField('Product', related_name="categories")
 
     def __str__(self):
         return self.name
