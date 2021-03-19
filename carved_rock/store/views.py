@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView
 
 from .models import Product
 
 
-class ProductListView(ListView):
-    model = Product
+def category_view(request, name):
+    products = Product.objects.filter(category__name=name)
+
+    return render(request, "store/category.html",
+                  {'products': products,
+                   'category_name': name})

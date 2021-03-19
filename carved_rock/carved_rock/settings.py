@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'store'
+    "crispy_forms",
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,5 @@ LOGGING = {
     "root": {"handlers": ["console"]},
 }
 
+# Crispy
+CRISPY_TEMPLATE_PACK = "bootstrap3"
